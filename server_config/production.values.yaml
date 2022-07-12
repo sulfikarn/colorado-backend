@@ -1,0 +1,56 @@
+replicaCount: 1
+
+runtime: RUN_TIME
+
+image:
+  repository: CI_REGISTRY_IMAGE
+  pullPolicy: Always
+  # Overrides the image tag whose default is the chart appVersion.
+  tag: "CI_COMMIT_TAG"
+
+port:
+  name: http
+  containerPort: 3000
+  protocol: TCP
+
+healthcheck:
+  enabled: true
+  path: /
+
+imagePullSecrets: [ name: gitlab-registry ]
+
+service:
+  type: ClusterIP
+  port: 3000
+
+istio:
+  enabled: true
+  secretName: URL
+  commonName: URL
+  issuerRefName: letsencrypt-prod
+  hosts:
+    - URL
+
+variables:
+  enabled: true
+  data: DOCKER_VARIABLES
+  path: /server/variables.docker.rb
+  subpath: variables.docker.rb
+
+autoscaling:
+  enabled: true
+  minReplicas: 2
+  maxReplicas: 10
+  targetCPUUtilizationPercentage: 60
+  targetMemoryUtilizationPercentage: 80
+
+nodeSelector:
+  env: prod
+
+resources:
+  requests:
+    cpu: "250m"
+    memory: "256Mi"
+  limits:
+    cpu: "750m"
+    memory: "512Mi"

@@ -1,0 +1,82 @@
+{
+  "name": "version-test",
+  "version": "0.0.0",
+  "description": "version application for test",
+  "main": "index.js",
+  "repository": "git@git.netobjex.com:colorado/colorado-backend.git",
+  "author": "Sachu Shaji Abraham <sachu.shaji@netobjex.com>",
+  "contributors": [
+    "Atul Sathyan <atul.sathyan@netobjex.com>"
+  ],
+  "private": true,
+  "scripts": {
+    "build": "tsc",
+    "test": "TEST=true nyc ava --verbose",
+    "start": "npm run build && node dist/index.js ",
+    "start:dev": "nodemon index.ts"
+  },
+  "devDependencies": {
+    "@types/body-parser": "^1.19.0",
+    "@types/cors": "^2.8.8",
+    "@types/express": "^4.17.9",
+    "@types/node": "^14.14.11",
+    "@types/supertest": "^2.0.10",
+    "@typescript-eslint/eslint-plugin": "^4.5.0",
+    "@typescript-eslint/parser": "^4.5.0",
+    "ava": "^3.14.0",
+    "eslint": "^7.11.0",
+    "eslint-config-google": "^0.14.0",
+    "husky": ">=4",
+    "lint-staged": ">=10",
+    "nyc": "^15.1.0",
+    "supertest": "^6.0.1",
+    "ts-node": "^9.1.1",
+    "typescript": "^4.0.3"
+  },
+  "husky": {
+    "hooks": {
+      "pre-commit": "lint-staged"
+    }
+  },
+  "lint-staged": {
+    "*.ts": "eslint --cache --fix"
+  },
+  "ava": {
+    "extensions": [
+      "ts"
+    ],
+    "files": [
+      "**/**/*.test.ts"
+    ],
+    "require": [
+      "ts-node/register"
+    ]
+  },
+  "dependencies": {
+    "@elastic/elasticsearch": "^7.10.0",
+    "@godaddy/terminus": "godaddy/terminus",
+    "@types/express-fileupload": "^1.1.6",
+    "@types/jsonwebtoken": "^8.5.0",
+    "@types/lodash": "^4.14.168",
+    "@types/mongoose": "^5.10.3",
+    "@types/node-fetch": "^2.5.7",
+    "body-parser": "^1.19.0",
+    "cors": "^2.8.5",
+    "csv-file-validator": "^1.10.1",
+    "dotenv": "^8.2.0",
+    "express": "^4.17.1",
+    "express-fileupload": "^1.2.0",
+    "express-validator": "^6.8.0",
+    "express-winston": "^4.0.5",
+    "form-data": "^3.0.0",
+    "helmet": "^4.2.0",
+    "jsonwebtoken": "^8.5.1",
+    "lodash": "^4.17.20",
+    "mongoose": "^5.11.15",
+    "nock": "^13.0.5",
+    "node-fetch": "^2.6.1",
+    "nodemon": "^2.0.7",
+    "winston": "^3.3.3",
+    "xlsx": "^0.16.9"
+  }
+}

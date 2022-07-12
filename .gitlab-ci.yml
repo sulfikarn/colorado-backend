@@ -1,0 +1,19 @@
+---
+#
+# Gitlab CI configuration file
+#
+
+include:
+  - project: "devops/netobjex-pipelines"
+    file: "templates/.gitlab-ci-general-service-helm-v3-template.yml"
+
+variables:
+  CLUSTER_NAME: no-eks
+  APP_NAME: api-airquality
+  URL_AZ: ${APP_NAME}.az.netobjex.com
+  URL_SEA_AZ: ${APP_NAME}.sea.netobjex.com
+  URL_PRODUCTION: ${APP_NAME}.netobjex.com
+
+stages:
+  - dockerize
+  - deploy
